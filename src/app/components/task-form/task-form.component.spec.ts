@@ -8,7 +8,7 @@ describe('TaskFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TaskFormComponent]
+      declarations: [TaskFormComponent]
     })
     .compileComponents();
 

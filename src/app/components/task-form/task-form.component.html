@@ -1,1 +1,53 @@
-<p>task-form works!</p>
+<h2 mat-dialog-title>{{ data.task ? 'Edit Task' : 'Add Task' }}</h2>
+
+<mat-dialog-content>
+  <div class="container d-flex justify-content-center">
+    <div class="w-100" style="max-width: 500px;">
+      <form [formGroup]="taskForm">
+        <div class="mb-3">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" required />
+            <mat-error *ngIf="taskForm.get('title')?.invalid">Title is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="mb-3">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="mb-3">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="Pending">Pending</mat-option>
+              <mat-option value="In Progress">In Progress</mat-option>
+              <mat-option value="Completed">Completed</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="mb-3">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Due Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dueDate" required />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="taskForm.get('dueDate')?.invalid">Due date is required</mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="taskForm.invalid">
+    Save
+  </button>
+</mat-dialog-actions>
